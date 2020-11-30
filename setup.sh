@@ -99,7 +99,7 @@ read -r -p "Desired SSH log-in port (default: 22): " SSHPORT
 SSHPORT=${SSHPORT:-22}
 
 read -r -p "Desired WireGuard port (default: 51820): " WGPORT
-SSHPORT=${WGPORT:-51820}
+WGPORT=${WGPORT:-51820}
 
 read -r -p "New SSH log-in user name: " LOGINUSERNAME
 
@@ -180,6 +180,7 @@ iptables -A INPUT -p tcp --dport "${SSHPORT}" -j ACCEPT
 # accept IPSec/NAT-T for VPN (ESP not needed with forceencaps, as ESP goes inside UDP)
 iptables -A INPUT -p udp --dport  500 -j ACCEPT
 iptables -A INPUT -p udp --dport 4500 -j ACCEPT
+iptables -A INPUT -p udp --dport "${SSHPORT}" -j ACCEPT
 
 # forward VPN traffic anywhere
 iptables -A FORWARD --match policy --pol ipsec --dir in  --proto esp -s "${VPNIPPOOL}" -j ACCEPT
