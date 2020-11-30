@@ -98,6 +98,9 @@ read -r -p "Email address for sysadmin (e.g. j.bloggs@example.com): " EMAILADDR
 read -r -p "Desired SSH log-in port (default: 22): " SSHPORT
 SSHPORT=${SSHPORT:-22}
 
+read -r -p "Desired WireGuard port (default: 51820): " WGPORT
+SSHPORT=${WGPORT:-51820}
+
 read -r -p "New SSH log-in user name: " LOGINUSERNAME
 
 CERTLOGIN="n"
@@ -133,7 +136,7 @@ apt autoremove -y
 debconf-set-selections <<< "postfix postfix/mailname string ${VPNHOST}"
 debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 
-apt-get -o Acquire::ForceIPv4=true install -y language-pack-en strongswan libstrongswan-standard-plugins strongswan-libcharon libcharon-standard-plugins libcharon-extra-plugins  iptables-persistent postfix mutt unattended-upgrades certbot uuid-runtime
+apt-get -o Acquire::ForceIPv4=true install -y language-pack-en strongswan libstrongswan-standard-plugins strongswan-libcharon libcharon-standard-plugins libcharon-extra-plugins wireguard iptables-persistent postfix mutt unattended-upgrades certbot uuid-runtime
 
 
 echo
