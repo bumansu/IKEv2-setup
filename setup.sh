@@ -183,7 +183,7 @@ iptables -A INPUT -p tcp --dport "${SSHPORT}" -j ACCEPT
 # accept IPSec/NAT-T for VPN (ESP not needed with forceencaps, as ESP goes inside UDP)
 iptables -A INPUT -p udp --dport  500 -j ACCEPT
 iptables -A INPUT -p udp --dport 4500 -j ACCEPT
-iptables -A INPUT -p udp --dport "${SSHPORT}" -j ACCEPT
+iptables -A INPUT -p udp -m multiport --dports "${WGPORT}" -j ACCEPT
 # forward for wg
 iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 # forward VPN traffic anywhere
