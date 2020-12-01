@@ -139,7 +139,7 @@ apt autoremove -y
 debconf-set-selections <<< "postfix postfix/mailname string ${VPNHOST}"
 debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 
-apt-get -o Acquire::ForceIPv4=true install -y language-pack-en strongswan libstrongswan-standard-plugins strongswan-libcharon libcharon-standard-plugins libcharon-extra-plugins wireguard iptables-persistent postfix mutt unattended-upgrades certbot uuid-runtime
+apt-get -o Acquire::ForceIPv4=true install -y language-pack-en strongswan libstrongswan-standard-plugins strongswan-libcharon libcharon-standard-plugins libcharon-extra-plugins wireguard curl git bc jq dnsutils iptables-persistent postfix mutt unattended-upgrades certbot uuid-runtime
 
 
 echo
